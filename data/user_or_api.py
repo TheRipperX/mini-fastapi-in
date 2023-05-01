@@ -40,6 +40,7 @@ def unhash_pass_db(string):
     return byte_unhash
 
 
+# edit token by token user 
 def token_user_login(token):
     token = str(token)
     edit_token = token.replace("b'", "").replace("'", "")    
@@ -126,7 +127,7 @@ def login_user(users: Login_Model, db: Session):
         return message
 
 
-
+# login user by token
 def login_user_by_token(users: Login_Model_Token, db: Session):
     message = {"status": "error"}
 
@@ -154,6 +155,7 @@ def login_user_by_token(users: Login_Model_Token, db: Session):
         return message
     
 
+# pay acount pro user
 def pay_app(token: Login_Model_Token, day_pro: Pay_Enum , db: Session):
     message = {"status": "error"}
 
@@ -225,7 +227,7 @@ def pay_app(token: Login_Model_Token, day_pro: Pay_Enum , db: Session):
         return message
 
 
-
+# info user acount by token
 def info_user_account(token: Login_Model_Token, db: Session):
     message = {"status": "error"}
 
