@@ -99,7 +99,7 @@ def login_user(users: Login_Model, db: Session):
 
         if it_pass_unhash == password_user:
             random_int = random.randint(999, 99999)
-            make_token_login = data.username + data.email + str(random_int)
+            make_token_login = str(random_int) + data.username + data.email + str(random_int)
             token_login_user = hash.hash_password(make_token_login)
             token_login_user_show = token_user_login(token_login_user)
             
@@ -247,7 +247,11 @@ def info_user_account(token: Login_Model_Token, db: Session):
         date_end_pe = gregorian_to_jalali(date_end.year, date_end.month, date_end.day)
         
         # day end 
-        day_end = date_end - date_buy
+        date_now = datetime.now()
+        date_now_date = date(date_now.year, date_now.month, date_now.day)
+        date_end_date = date(date_end.year, date_end.month, date_end.day)
+        day_end = date_end_date - date_now_date
+
 
         # is pro user 
         if date_end >= date_buy:
