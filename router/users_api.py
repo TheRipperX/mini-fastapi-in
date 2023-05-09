@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, status
 from fastapi.exceptions import HTTPException
-from model.base_models import *
+
+from model.base_models import User_Model, Login_Model, Login_Model_Token, Pay_Enum
 
 from database.db import get_session
-from database.db import Base
 
 from data import user_or_api
 
@@ -20,7 +20,7 @@ async def new_user(user: User_Model, db = Depends(get_session)):
     # add user to database
     query = user_or_api.create_user(user, db)
 
-    if query["status"] == "success":
+    if query["status"] == 1:
         message = {}
         message["status"] = query["status"]
 

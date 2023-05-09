@@ -27,3 +27,8 @@ class Pay_Enum(str, Enum):
     day_90 = "90"
 
 
+# create a new post
+class Post_Model(BaseModel):
+    title: str
+    description: str
+    public: Optional[bool] = None
