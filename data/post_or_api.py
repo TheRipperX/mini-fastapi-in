@@ -2,7 +2,7 @@ from sqlalchemy.orm.session import Session
 from model.base_models import *
 from database.db_table import PostUser, User
 
-from datetime import datetime, date
+from datetime import datetime
 
 
 # create a new post
@@ -42,3 +42,8 @@ def create_post(token: Login_Model_Token, posts: Post_Model, db: Session):
     except:
         message["data"] = "server error invalid items..."
         return message
+
+
+# show all posts
+def show_posts():
+    pass
