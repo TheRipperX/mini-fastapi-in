@@ -32,3 +32,7 @@ class Post_Model(BaseModel):
     title: str
     description: str
     public: Optional[bool] = None
+
+
+class Show_Post_User(BaseModel):
+    token: str

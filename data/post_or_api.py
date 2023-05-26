@@ -45,5 +45,33 @@ def create_post(token: Login_Model_Token, posts: Post_Model, db: Session):
 
 
 # show all posts
-def show_posts():
-    pass
+def show_posts(token: Show_Post_User, db: Session):
+    message = {"status": 0}
+
+    try:
+        query_user = db.query(User).filter(User.token_user == token.token).first()
+
+        if query_user is None:
+            message["data"] = "token not found..."
+            return message
+
+        user_id = query_user.id
+
+        query_post = db.query(PostUser).filter(PostUser.user_id == user_id).all()
+
+        if query_post is None:  
+            message["data"] = "no post user..."
+            return message
+
+        message["status"] = 1
+        message["data"] = {
+            "user":{"name": query_user.name, "username": query_user.username},
+            "post": {"count_post": len(query_post), "posts": query_post}
+            }
+        
+        return message
+
+
+    except:
+        message["data"] = "server error invalid items..."
+        return message

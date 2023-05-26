@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, status
 from fastapi.exceptions import HTTPException
 
 from database.db import get_session
-from model.base_models import Post_Model, Login_Model_Token
+from model.base_models import Post_Model, Login_Model_Token, Show_Post_User
 from data import post_or_api
 
 
@@ -17,9 +17,15 @@ async def create_post(token: Login_Model_Token, posts: Post_Model, db = Depends(
     
     query_post = post_or_api.create_post(token, posts, db)
 
-    if query_post["status"] == 1:
-    
-        return query_post
+    return query_post
 
-    else:
-        return query_post
+
+@router.post("/show_posts")
+async def show_post_user(token: Show_Post_User, db = Depends(get_session)):
+
+    if token.token is None or token.token == "":
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid or empty data for show post")
+    
+    query_show_post = post_or_api.show_posts(token, db)
+
+    return query_show_post
