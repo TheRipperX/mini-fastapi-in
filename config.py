@@ -1,7 +1,12 @@
 from fastapi import FastAPI
 
+from fastapi import Depends
+
 from database import db_table
-from database.db import engin
+from database.db import engin, get_session
+
+# show all posts class
+from data.index_or_api import get_posts
 
 from router import users_api, post_api
 
@@ -15,7 +20,7 @@ app.include_router(post_api.router)
 
 
 @app.get("/")
-def index():
-    message = {"message":"Hello, world!"}
+def index(db = Depends(get_session)):
+    data = get_posts(db)
 
-    return message
+    return data
