@@ -25,18 +25,6 @@ class Hash_Pass():
         return decrypt_pass
 
 
-# h = Hash_Pass()
 
-# text = "davoud"
-
-# out = h.hash_password(text)
-# b = "b'gAAAAABkRAAbqxXB6oGA2eSb4DtN3HUYj-y4BpeGyHCWUFsXExruZ4VFhi2EFuGVL1ZmGAbHAfRn7sw8zFrbHAr9t2Nhnzo2NQ=='"
-# s = bytes(b, encoding='utf-8')
-# print(type(b))
-# print(type(s))
-# decrypted = h.unhash_password(b)
-
-# print(out)
-# print(decrypted)
 
 
